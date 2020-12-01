@@ -18,7 +18,7 @@ The new data is pushed back to the same repository.
 [schedule url]: https://github.com/lc-bot/llnl.github.io-actions/blob/master/.github/workflows/main.yml "lc-bot/llnl.github.io-actions/.github/workflows/main.yml"
 <!-- Last Update -->
 [timestamp img]: https://img.shields.io/badge/dynamic/json?color=informational&label=Last%20Update&query=%24%5B0%5D.commit.author.date&url=https%3A%2F%2Fapi.github.com%2Frepos%2FLLNL%2Fllnl.github.io%2Fcommits%3Fpath%3D_explore%2FLAST_MASTER_UPDATE.txt%26per_page%3D1&style=flat
-[timestamp url]: https://github.com/LLNL/llnl.github.io/blob/master/_explore/LAST_MASTER_UPDATE.txt "LLNL/llnl.github.io/.../LAST_MASTER_UPDATE.txt"
+[timestamp url]: https://github.com/LLNL/llnl.github.io/blob/main/_explore/LAST_MASTER_UPDATE.txt "LLNL/llnl.github.io/.../LAST_MASTER_UPDATE.txt"
 <!-- Pages Deployment -->
 [deployment img]: https://img.shields.io/github/deployments/LLNL/llnl.github.io/github-pages?label=Pages%20Deployment&logo=github&logoColor=white&style=flat
 [deployment url]: https://github.com/LLNL/llnl.github.io/deployments/activity_log?environment=github-pages "LLNL/llnl.github.io/deployments/activity_log > GitHub Pages"

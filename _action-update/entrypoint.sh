@@ -6,7 +6,7 @@ set -eu
 # Check hub installation
 hub version
 
-# Requires BRANCH_NAME, BOT_USER, BOT_TOKEN to be included by workflow
+# Requires UPDATE_BRANCH_NAME, DEFAULT_BRANCH_NAME, BOT_USER, BOT_TOKEN to be included by workflow
 export GITHUB_API_TOKEN=$BOT_TOKEN
 
 ACT_LOG_PATH=_explore/LAST_MASTER_UPDATE.txt
@@ -27,8 +27,8 @@ cd llnl.github.io
 REPO_ROOT=$(pwd)
 
 # Checkout data update branch, creating new if necessary
-git checkout $BRANCH_NAME || git checkout -b $BRANCH_NAME
-git merge --no-edit master
+git checkout $UPDATE_BRANCH_NAME || git checkout -b $UPDATE_BRANCH_NAME
+git merge --no-edit $DEFAULT_BRANCH_NAME
 
 # Store previous END timestamp
 OLD_END=$(cat $ACT_LOG_PATH | grep END | cut -f 2)

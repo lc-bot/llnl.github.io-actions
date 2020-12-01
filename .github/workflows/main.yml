@@ -13,6 +13,7 @@ jobs:
     - name: Run Data Update
       uses: ./_action-update
       env:
-        BRANCH_NAME: master
+        UPDATE_BRANCH_NAME: main
+        DEFAULT_BRANCH_NAME: main
         BOT_USER: lc-bot
         BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
