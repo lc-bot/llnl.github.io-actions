@@ -9,9 +9,9 @@ hub version
 # Requires UPDATE_BRANCH_NAME, DEFAULT_BRANCH_NAME, BOT_USER, BOT_TOKEN to be included by workflow
 export GITHUB_API_TOKEN=$BOT_TOKEN
 
-ACT_LOG_PATH=_explore/LAST_MASTER_UPDATE.txt
-ACT_INPUT_PATH=_explore
-ACT_DATA_PATH=explore/github-data
+ACT_LOG_PATH=_visualize/LAST_MASTER_UPDATE.txt
+ACT_INPUT_PATH=_visualize
+ACT_DATA_PATH=visualize/github-data
 
 DATA_TIMESTAMP=$(date -u "+%F-%H")
 CLONE_CUTOFF=$(date -u "+%F" -d "7 days ago")
@@ -34,7 +34,7 @@ git merge --no-edit $DEFAULT_BRANCH_NAME
 OLD_END=$(cat $ACT_LOG_PATH | grep END | cut -f 2)
 OLD_END=$(date --date="$OLD_END" "+%s")
 
-cd $REPO_ROOT/_explore/scripts
+cd $REPO_ROOT/_visualize/scripts
 
 # Install python dependencies
 pip install -r requirements.txt
