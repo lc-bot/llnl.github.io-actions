@@ -13,7 +13,6 @@ The new data is pushed back to the same repository.
 
 ## Portal Status
 
-[![Build][build img]][build url]
 [![Pages Deployment][deployment img]][deployment url]
 [![Last Deployment][deploytime img]][deployment url]
 
@@ -26,9 +25,6 @@ The new data is pushed back to the same repository.
 <!-- "Last Update" timestamp -->
 [timestamp img]: https://img.shields.io/badge/dynamic/json?color=informational&label=Last%20Update&query=%24%5B0%5D.commit.author.date&url=https%3A%2F%2Fapi.github.com%2Frepos%2FLLNL%2Fllnl.github.io%2Fcommits%3Fpath%3D_visualize%2FLAST_MASTER_UPDATE.txt%26per_page%3D1&style=flat
 [timestamp url]: https://github.com/LLNL/llnl.github.io/blob/main/_visualize/LAST_MASTER_UPDATE.txt "LLNL/llnl.github.io/.../LAST_MASTER_UPDATE.txt"
-<!-- "Build" status -->
-[build img]: https://img.shields.io/github/checks-status/LLNL/llnl.github.io/main?label=Build&logo=travis-ci&logoColor=white
-[build url]: https://github.com/LLNL/llnl.github.io/commits/main "LLNL/llnl.github.io/commits/main"
 <!-- "Pages Deployment" status -->
 [deployment img]: https://img.shields.io/github/deployments/LLNL/llnl.github.io/github-pages?label=Pages%20Deployment&logo=github&logoColor=white&style=flat
 [deployment url]: https://github.com/LLNL/llnl.github.io/deployments/activity_log?environment=github-pages "LLNL/llnl.github.io/deployments/activity_log > GitHub Pages"
