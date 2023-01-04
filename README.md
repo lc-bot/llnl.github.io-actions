@@ -17,7 +17,7 @@ The new data is pushed back to the same repository.
 [![Last Deployment][deploytime img]][deployment url]
 
 <!-- "Scheduled Data Update" action status -->
-[workflow img]: https://img.shields.io/github/workflow/status/lc-bot/llnl.github.io-actions/Scheduled%20Data%20Update/main?label=Scheduled%20Data%20Update&logo=github-actions&logoColor=white&style=flat
+[workflow img]: https://img.shields.io/github/actions/workflow/status/lc-bot/llnl.github.io-actions/main.yml?branch=main&label=Scheduled%20Data%20Update&logo=github-actions&logoColor=white&style=flat
 [workflow url]: https://github.com/lc-bot/llnl.github.io-actions/actions?query=workflow%3A%22Scheduled+Data+Update%22 "lc-bot/llnl.github.io-actions/actions > Scheduled Data Update"
 <!-- "Trigger" schedule -->
 [schedule img]: https://img.shields.io/badge/Trigger-daily%20%40%2008%3A05%20UTC-informational?style=flat
