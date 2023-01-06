@@ -89,7 +89,9 @@ if [ "$CHANGE_COUNT" -ne "$VALID_COUNT" ]
 fi
 
 ### COMMIT UPDATE ###
-git pull
+git stash
+git pull --ff-only
+git stash pop
 git commit -m "${DATA_TIMESTAMP} Data Update by ${BOT_USER}"
 git push origin $UPDATE_BRANCH_NAME
 
