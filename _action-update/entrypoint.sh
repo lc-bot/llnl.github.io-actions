@@ -42,7 +42,6 @@ pip install -r requirements.txt
 # Run MASTER script
 ./MASTER.sh
 cd $REPO_ROOT
-git add -A .
 
 ### VALIDATE UPDATE ###
 
@@ -92,6 +91,7 @@ fi
 git stash
 git pull --ff-only
 git stash pop
+git add -A .
 git commit -m "${DATA_TIMESTAMP} Data Update by ${BOT_USER}"
 git push origin $UPDATE_BRANCH_NAME
 
