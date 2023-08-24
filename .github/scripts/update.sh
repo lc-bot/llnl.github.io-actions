@@ -1,12 +1,8 @@
 #!/bin/sh -l
 
 set -eu
-. /opt/venv/bin/activate
 
-# Check hub installation
-hub version
-
-# Requires UPDATE_BRANCH_NAME, DEFAULT_BRANCH_NAME, BOT_USER, BOT_TOKEN to be included by workflow
+# Requires BOT_USER, BOT_TOKEN to be included by workflow
 export GITHUB_API_TOKEN=$BOT_TOKEN
 
 ACT_LOG_PATH=_visualize/LAST_MASTER_UPDATE.txt
@@ -14,21 +10,13 @@ ACT_INPUT_PATH=_visualize
 ACT_DATA_PATH=visualize/github-data
 
 DATA_TIMESTAMP=$(date -u "+%F-%H")
-CLONE_CUTOFF=$(date -u "+%F" -d "7 days ago")
 
-# Configure git + hub
+# Configure git
 git config --global user.name "${BOT_USER}"
 git config --global user.email "${BOT_USER}@users.noreply.github.com"
-git config --global hub.protocol https
 
-# Get latest copy of repository
-git clone --shallow-since=$CLONE_CUTOFF --no-single-branch "https://${BOT_USER}:${BOT_TOKEN}@github.com/LLNL/llnl.github.io.git"
-cd llnl.github.io
+cd datarepo
 REPO_ROOT=$(pwd)
-
-# Checkout data update branch, creating new if necessary
-git checkout $UPDATE_BRANCH_NAME || git checkout -b $UPDATE_BRANCH_NAME
-git merge --no-edit $DEFAULT_BRANCH_NAME
 
 # Store previous END timestamp
 OLD_END=$(cat $ACT_LOG_PATH | grep END | cut -f 2)
@@ -37,6 +25,7 @@ OLD_END=$(date --date="$OLD_END" "+%s")
 cd $REPO_ROOT/_visualize/scripts
 
 # Install python dependencies
+pip install --upgrade pip setuptools wheel
 pip install -r requirements.txt
 
 # Run MASTER script
@@ -93,9 +82,6 @@ git pull --ff-only
 git stash pop
 git add -A .
 git commit -m "${DATA_TIMESTAMP} Data Update by ${BOT_USER}"
-git push origin $UPDATE_BRANCH_NAME
-
-# Create pull request, or list existing
-# hub pull-request --no-edit --message "Data Update by ${BOT_USER}" || hub pr list --state open --head $UPDATE_BRANCH_NAME
+git push
 
 exit 0
