@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: main
       - name: Checkout secondary repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: LLNL/llnl.github.io.git
           ref: main
@@ -37,4 +37,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: logfiles
-          path: datarepo/_visualize/LAST_MASTER_UPDATE.log
+          path: |
+            datarepo/_visualize/LAST_MASTER_UPDATE.txt
+            datarepo/_visualize/LAST_MASTER_UPDATE.log
