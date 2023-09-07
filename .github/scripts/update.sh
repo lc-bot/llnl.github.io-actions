@@ -24,10 +24,6 @@ OLD_END=$(date --date="$OLD_END" "+%s")
 
 cd $REPO_ROOT/_visualize/scripts
 
-# Install python dependencies
-pip install --upgrade pip setuptools wheel
-pip install -r requirements.txt
-
 # Run MASTER script
 ./MASTER.sh
 cd $REPO_ROOT

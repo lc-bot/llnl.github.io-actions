@@ -26,13 +26,15 @@ jobs:
           python-version: "3.11"
           cache: "pip"
           cache-dependency-path: "datarepo/_visualize/scripts/requirements.txt"
+      - name: Install dependencies
+        run: pip install -r datarepo/_visualize/scripts/requirements.txt
       - name: Run update script
         shell: bash
         run: ./main/.github/scripts/update.sh
         env:
           BOT_USER: lc-bot
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-      - name: Save log file
+      - name: Save log files
         if: always()
         uses: actions/upload-artifact@v3
         with:
