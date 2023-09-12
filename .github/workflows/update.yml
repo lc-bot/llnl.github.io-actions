@@ -2,7 +2,7 @@ name: Scheduled Data Update
 
 on:
   schedule:
-    - cron: "5 8 * * *"
+    - cron: "45 7 * * *"
 
 jobs:
   runDataUpdate:
@@ -32,6 +32,7 @@ jobs:
         shell: bash
         run: ./main/.github/scripts/update.sh
         env:
+          REPO_ROOT: datarepo
           BOT_USER: lc-bot
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
       - name: Save log files
