@@ -33,7 +33,7 @@ jobs:
         run: ./main/.github/scripts/cache.sh
         env:
           REPO_ROOT: datarepo
-          BOT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
       - name: Save log files
         if: always()
         uses: actions/upload-artifact@v3
