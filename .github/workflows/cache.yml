@@ -2,7 +2,7 @@ name: Scheduled Cache Request
 
 on:
   schedule:
-    - cron: "45 4 * * *"
+    - cron: "45 5 * * *"
 
 jobs:
   runDataUpdate:
@@ -32,7 +32,7 @@ jobs:
         shell: bash
         run: ./main/.github/scripts/cache.sh
         env:
-          REPO_ROOT: datarepo
+          DATA_REPO: datarepo
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
       - name: Save log files
         if: always()

@@ -32,7 +32,7 @@ jobs:
         shell: bash
         run: ./main/.github/scripts/update.sh
         env:
-          REPO_ROOT: datarepo
+          DATA_REPO: datarepo
           BOT_USER: lc-bot
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
       - name: Save log files

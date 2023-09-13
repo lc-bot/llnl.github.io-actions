@@ -2,7 +2,7 @@
 
 set -eu
 
-# Requires REPO_ROOT, BOT_USER, BOT_TOKEN to be included by workflow
+# Requires DATA_REPO, BOT_USER, BOT_TOKEN to be included by workflow
 export GITHUB_API_TOKEN=$BOT_TOKEN
 
 ACT_LOG_PATH=_visualize/LAST_MASTER_UPDATE.txt
@@ -14,6 +14,9 @@ DATA_TIMESTAMP=$(date -u "+%F-%H")
 # Configure git
 git config --global user.name "${BOT_USER}"
 git config --global user.email "${BOT_USER}@users.noreply.github.com"
+
+cd $DATA_REPO
+REPO_ROOT=$(pwd)
 
 # Store previous END timestamp
 OLD_END=$(cat $ACT_LOG_PATH | grep END | cut -f 2)
