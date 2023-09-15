@@ -2,12 +2,21 @@
 
 set -eu
 
-# Requires DATA_REPO, BOT_USER, BOT_TOKEN to be included by workflow
-export GITHUB_API_TOKEN=$BOT_TOKEN
+### VARIABLES ###
+
+# From action env:
+#   BOT_USER
+#   BOT_TOKEN
+#   DATA_REPO
 
 ACT_LOG_PATH=_visualize/LAST_MASTER_UPDATE.txt
 ACT_INPUT_PATH=_visualize
 ACT_DATA_PATH=visualize/github-data
+ACT_SCRIPT_PATH=_visualize/scripts
+
+### SETUP ###
+
+export GITHUB_API_TOKEN=$BOT_TOKEN
 
 DATA_TIMESTAMP=$(date -u "+%F-%H")
 
@@ -15,6 +24,7 @@ DATA_TIMESTAMP=$(date -u "+%F-%H")
 git config --global user.name "${BOT_USER}"
 git config --global user.email "${BOT_USER}@users.noreply.github.com"
 
+# Store absolute path
 cd $DATA_REPO
 REPO_ROOT=$(pwd)
 
@@ -22,13 +32,14 @@ REPO_ROOT=$(pwd)
 OLD_END=$(cat $ACT_LOG_PATH | grep END | cut -f 2)
 OLD_END=$(date --date="$OLD_END" "+%s")
 
-cd $REPO_ROOT/_visualize/scripts
+### RUN MASTER SCRIPT ###
 
-# Run MASTER script
+cd $REPO_ROOT/$ACT_SCRIPT_PATH
 ./MASTER.sh
-cd $REPO_ROOT
 
 ### VALIDATE UPDATE ###
+
+cd $REPO_ROOT
 
 #   Timestamp log changed
 cat $ACT_LOG_PATH

@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: "45 7 * * *"
 
+env:
+  BOT_USER: lc-bot
+  DATA_REPO: datarepo
+  SECONDARY_REPO: LLNL/llnl.github.io.git
+  SECONDARY_BRANCH: main
+
 jobs:
   runDataUpdate:
     name: Run Data Update
@@ -12,28 +18,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          path: main
+          path: thisrepo
       - name: Checkout secondary repo
         uses: actions/checkout@v4
         with:
-          repository: LLNL/llnl.github.io.git
-          ref: main
-          path: datarepo
+          repository: $SECONDARY_REPO
+          ref: $SECONDARY_BRANCH
+          path: $DATA_REPO
           token: ${{ secrets.BOT_TOKEN }}
       - name: Setup python
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
           cache: "pip"
-          cache-dependency-path: "datarepo/_visualize/scripts/requirements.txt"
+          cache-dependency-path: "$DATA_REPO/_visualize/scripts/requirements.txt"
       - name: Install dependencies
-        run: pip install -r datarepo/_visualize/scripts/requirements.txt
+        run: pip install -r $DATA_REPO/_visualize/scripts/requirements.txt
       - name: Run update script
         shell: bash
-        run: ./main/.github/scripts/update.sh
+        run: ./thisrepo/.github/scripts/update.sh
         env:
-          DATA_REPO: datarepo
-          BOT_USER: lc-bot
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
       - name: Save log files
         if: always()
@@ -41,5 +45,5 @@ jobs:
         with:
           name: logfiles
           path: |
-            datarepo/_visualize/LAST_MASTER_UPDATE.txt
-            datarepo/_visualize/LAST_MASTER_UPDATE.log
+            $DATA_REPO/_visualize/LAST_MASTER_UPDATE.txt
+            $DATA_REPO/_visualize/LAST_MASTER_UPDATE.log
