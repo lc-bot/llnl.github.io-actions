@@ -2,7 +2,7 @@ name: Scheduled Cache Request
 
 on:
   schedule:
-    - cron: "45 5 * * *"
+    - cron: "45 6 * * *"
 
 env:
   # GitHub username (owner of BOT_TOKEN, will be credited for updates)
@@ -22,21 +22,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          path: $ACTION_REPO
+          path: ${{ env.ACTION_REPO }}
       - name: Checkout secondary repo
         uses: actions/checkout@v4
         with:
-          repository: $SECONDARY_REPO
-          ref: $SECONDARY_BRANCH
-          path: $DATA_REPO
+          repository: ${{ env.SECONDARY_REPO }}
+          ref: ${{ env.SECONDARY_BRANCH }}
+          path: ${{ env.DATA_REPO }}
           token: ${{ secrets.BOT_TOKEN }}
       - name: Setup python
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
           cache: "pip"
-          cache-dependency-path: "$DATA_REPO/_visualize/scripts/requirements.txt"
+          cache-dependency-path: "${{ env.DATA_REPO }}/_visualize/scripts/requirements.txt"
       - name: Install dependencies
+        shell: bash
         run: pip install -r $DATA_REPO/_visualize/scripts/requirements.txt
       - name: Run cache script
         shell: bash
@@ -49,5 +50,5 @@ jobs:
         with:
           name: logfiles
           path: |
-            $DATA_REPO/_visualize/LAST_CACHE_REQUEST.txt
-            $DATA_REPO/_visualize/LAST_CACHE_REQUEST.log
+            ${{ env.DATA_REPO }}/_visualize/LAST_CACHE_REQUEST.txt
+            ${{ env.DATA_REPO }}/_visualize/LAST_CACHE_REQUEST.log
