@@ -5,10 +5,14 @@ on:
     - cron: "45 7 * * *"
 
 env:
+  # GitHub username (owner of BOT_TOKEN, will be credited for updates)
   BOT_USER: lc-bot
-  DATA_REPO: datarepo
+  # GitHub repository and branch to be updated
   SECONDARY_REPO: LLNL/llnl.github.io.git
   SECONDARY_BRANCH: main
+  # Paths used to store cloned repositories
+  ACTION_REPO: thisrepo
+  DATA_REPO: datarepo
 
 jobs:
   runDataUpdate:
@@ -18,7 +22,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          path: thisrepo
+          path: $ACTION_REPO
       - name: Checkout secondary repo
         uses: actions/checkout@v4
         with:
@@ -36,7 +40,7 @@ jobs:
         run: pip install -r $DATA_REPO/_visualize/scripts/requirements.txt
       - name: Run update script
         shell: bash
-        run: ./thisrepo/.github/scripts/update.sh
+        run: ./$ACTION_REPO/.github/scripts/update.sh
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
       - name: Save log files
